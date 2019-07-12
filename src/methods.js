@@ -36,7 +36,7 @@ module.exports = {
   chechedPath(path) {
     if (!fs.existsSync(path)) {
       fs.mkdirSync(path)
-      console.log('文件夹创建成功！\r\r')
+      console.log('文件夹创建成功！')
     }
   },
   // 下载图片到本地
