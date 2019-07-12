@@ -14,7 +14,7 @@ module.exports = {
   getImageSrc(page) {
     let imageSrcArr = []
     let $ = cheerio.load(page.res.data)
-    let imageSrc = $('.carousel-inner')
+    $('.carousel-inner')
       .find('img')
       .each((index, item) => {
         imageSrcArr.push(item.attribs.src)
@@ -31,6 +31,13 @@ module.exports = {
         imageSrcNameArr.push(item.children[0].data)
       })
     return imageSrcNameArr
+  },
+  // 校验当前环境是否存在配置中的存放图片路径 不存在则创建
+  chechedPath(path) {
+    if (!fs.existsSync(path)) {
+      fs.mkdirSync(path)
+      console.log('文件夹创建成功！\r\r')
+    }
   },
   // 下载图片到本地
   async downloadImage(url, imageSrc, filePath) {
@@ -51,7 +58,7 @@ module.exports = {
     ReadStream.pipe(writeStream)
     // 监听当前图片下载完成
     writeStream.on('close', () => {
-      console.log(`${filePath} 下载完成`)
+      console.log(`${filePath} 下载完成！`)
     })
   }
 }

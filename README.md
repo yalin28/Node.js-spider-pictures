@@ -7,6 +7,8 @@ Node.js 批量抓取并下载站点图片并保存在本地
 
 ## 一、启动项目
 
+> 网速慢的话推荐 cnpm 去安装依赖
+
 命令：
 
 ```bash
@@ -20,7 +22,7 @@ npm start
 // 配置相关
 module.exports = {
   originPath: 'http://www.wufazhuce.com/', // 请求地址
-  savePath: 'D:/PIC' // 存放路径，根据需要去修改
+  savePath: 'D:/PIC' // 默认配置的存放路径，根据需要去修改
 }
 ```
 
