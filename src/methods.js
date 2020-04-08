@@ -1,7 +1,8 @@
-const config = require("./config"),
-  fs = require("fs"),
-  cheerio = require("cheerio"),
-  axios = require("axios")
+"use strict"
+const config = require("./config")
+const fs = require("fs")
+const cheerio = require("cheerio")
+const axios = require("axios")
 
 module.exports = {
   // 获取页面数据
@@ -28,7 +29,7 @@ module.exports = {
     $(".carousel-inner")
       .find(".titulo")
       .each((index, item) => {
-        imageSrcNameArr.push(item.children[0].data)
+        imageSrcNameArr.push($(item).text())
       })
     return imageSrcNameArr
   },
@@ -38,9 +39,9 @@ module.exports = {
       fs.mkdirSync(path)
       console.log("文件夹创建成功！")
     } else {
-      console.log("文件夹已经存在，调过创建文件目录")
+      console.log("文件夹已经存在，跳过创建文件目录")
     }
-    console.log(`图片输入目录：${config.savePath}/`)
+    console.log(`文件保存目录：${path}/`)
   },
   // 下载图片到本地
   async downloadImage(url, imageSrc, filePath) {
@@ -63,5 +64,44 @@ module.exports = {
     writeStream.on("close", () => {
       console.log(`${filePath} 下载完成！`)
     })
+  },
+  // 获取文章列表
+  getarticleTitleList(page) {
+    let articleData = {
+      title: "",
+      vol: "",
+      volTitle: "",
+      volTitleHref: "",
+      articleTitleList: [],
+    }
+    let $ = cheerio.load(page.res.data)
+    let rootClass = ".fp-one-articulo"
+    if ($("h4", rootClass).text()) {
+      articleData.title = $("h4", rootClass).text().replace(/\s+/g, "")
+    }
+    if ($(".one-titulo", rootClass).text()) {
+      articleData.vol = $(".one-titulo", rootClass).text().replace(/\s+/g, "")
+    }
+    if ($("a", ".one-articulo-titulo").text()) {
+      articleData.volTitle = $("a", ".one-articulo-titulo").text().replace(/\s+/g, "")
+      articleData.volTitleHref = $("a", ".one-articulo-titulo").attr("href").replace(/\s+/g, "")
+    }
+    let articleTitleList = []
+    $(".list-unstyled", rootClass)
+      .find("li")
+      .each((index, item) => {
+        let vol = $("span", item).text().replace(/\s+/g, "")
+        let title = $("a", item).contents().first().text().replace(/\s+/g, "")
+        let author = $("a", item).contents().eq(1).text().replace(/\s+/g, "")
+        let href = $("a", item).attr("href").replace(/\s+/g, "")
+        articleTitleList.push({
+          vol,
+          title,
+          author,
+          href,
+        })
+      })
+    articleData.articleTitleList = articleTitleList
+    return articleData
   },
 }

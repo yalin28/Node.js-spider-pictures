@@ -1,5 +1,14 @@
+"use strict"
 // 配置相关
+const savePath = "D:/download"
 module.exports = {
-  originPath: 'http://www.wufazhuce.com/', // 请求地址
-  savePath: 'D:/PIC' // 存放图片路径
+  savePath,
+  saveImg: {
+    originPath: "http://www.wufazhuce.com/",
+    savePath: `${savePath}/PIC`,
+  },
+  saveDomData: {
+    originPath: "http://www.wufazhuce.com/",
+    savePath: `${savePath}/DOM_DATA`,
+  },
 }

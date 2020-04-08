@@ -1,7 +1,7 @@
 {
   "name": "node.js-spider-pictures",
   "version": "1.0.0",
-  "description": "Node.js 批量抓取并下载站点图片并保存在本地",
+  "description": "Node.js 批量抓取并下载站点图片和文章信息并保存在本地",
   "author": "wuyiya",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "axios": "^0.19.2",
-    "cheerio": "^1.0.0-rc.3"
+    "cheerio": "^1.0.0-rc.3",
+    "inquirer": "^7.1.0"
   }
 }

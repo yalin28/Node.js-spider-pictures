@@ -1,9 +1,10 @@
 # Node.js-spider-pictures
 
-Node.js 批量抓取并下载站点图片并保存在本地
+Node.js 批量抓取并下载站点图片和文章信息并保存在本地
 
 目标网站：[「ONE · 一个」](http://www.wufazhuce.com/)  
-项目功能：批量下载该网站的轮播图
+
+项目功能：批量下载该网站精美的轮播图和文章列表标题内容
 
 ## 一、启动项目
 
@@ -21,8 +22,8 @@ npm start
 ```js
 // 配置相关
 module.exports = {
-  originPath: 'http://www.wufazhuce.com/', // 请求地址
-  savePath: 'D:/PIC' // 默认配置的存放路径，根据需要去修改
+  originPath: 'xxx', // 请求地址
+  savePath: 'xxx' // 默认配置的存放路径，根据需要去修改
 }
 ```
 
@@ -33,6 +34,7 @@ module.exports = {
 |  axios  | 获取页面数据                              |
 | cheerio | 操作 DOM 节点获取图片和图片名             |
 | Stream  | 创建读/写的数据流对象通过管道连接下载图片 |
+| writeFile|异步地将数据写入到一个文件，如果文件已存在则覆盖该文件|
 
 axios 相关代码：
 
@@ -63,7 +65,7 @@ getImageSrc(page) {
 
 Stream 相关代码：
 
-```
+```js
 // 创建读取数据流对象
 let { data: ReadStream } = await axios({
   method: 'get',
@@ -75,6 +77,20 @@ let { data: ReadStream } = await axios({
 let writeStream = fs.createWriteStream(filePath)
 // 通过管道下载数据流
 ReadStream.pipe(writeStream)
+```
+
+writeFile 相关代码：
+
+```js
+// 写文件到指定目录
+fs.writeFile(`${config.saveDomData.savePath}/test.json`, JSON.stringify(articleData, null, 2), (error) => {
+    if (error) {
+      console.log(error)
+      return false
+    }
+    console.log("数据保存成功！")
+  })
+}
 ```
 
 ## 四、说明
