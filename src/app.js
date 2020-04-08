@@ -1,6 +1,5 @@
-const fs = require("fs"),
-  config = require("./config"),
-  methods = require("./methods")
+const config = require("./config")
+const methods = require("./methods")
 
 const start = async () => {
   methods.chechedPath(config.savePath) //校验当前环境是否存在配置中的存放图片路径
