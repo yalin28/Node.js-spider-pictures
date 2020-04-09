@@ -2,7 +2,7 @@
   "name": "node.js-spider-pictures",
   "version": "1.0.0",
   "description": "Node.js 批量抓取并下载站点图片和文章信息并保存在本地",
-  "author": "yalin28",
+  "author": "yalin <leiyalin28@gmail.com>",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
