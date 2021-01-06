@@ -95,4 +95,5 @@ fs.writeFile(`${config.saveDomData.savePath}/test.json`, JSON.stringify(articleD
 
 ## 四、说明
 
-此项目仅用于个人学习，不用于任何商业用途，如果侵权，即刻删除！
+* 此项目仅用于个人学习，不用于任何商业用途，如果侵权，即刻删除！
+* 暂时只支持 Windows 平台。
