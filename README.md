@@ -23,7 +23,7 @@ npm start
 // 配置相关
 module.exports = {
   originPath: 'xxx', // 请求地址
-  savePath: 'xxx' // 默认配置的存放路径，根据需要去修改
+  savePath: 'xxx' // 默认配置的存放路径，根据需要去修改（macOS 一般是 /Users/你的用户名/xxx）
 }
 ```
 
@@ -96,4 +96,3 @@ fs.writeFile(`${config.saveDomData.savePath}/test.json`, JSON.stringify(articleD
 ## 四、说明
 
 * 此项目仅用于个人学习，不用于任何商业用途，如果侵权，即刻删除！
-* 暂时只支持 Windows 平台。
